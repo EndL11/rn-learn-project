@@ -1,16 +1,19 @@
 import React from "react";
 
-import { View, FlatList } from "react-native";
-import { ListItem } from "react-native-elements";
+import { FlatList } from "react-native";
+import { ListItem, Avatar } from "react-native-elements";
 
 function Menu(props) {
   const renderItemMenu = ({ item, index }) => {
-    return <ListItem 
-        title={item.name}
-        subtitle={item.description}
-        chevron={false}
-        leftAvatar={{source: require('./images/uthappizza.png')}}
-    />;
+    return (
+      <ListItem key={index} onPress={() => props.onDishPress(item.id)}>
+        <Avatar rounded={true} source={require("./images/uthappizza.png")} />
+        <ListItem.Content>
+          <ListItem.Title>{item.name}</ListItem.Title>
+          <ListItem.Subtitle>{item.description}</ListItem.Subtitle>
+        </ListItem.Content>
+      </ListItem>
+    );
   };
   return (
     <FlatList
