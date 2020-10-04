@@ -5,11 +5,15 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import Home from "./HomeComponent";
 import Menu from "./MenuComponent";
+import About from "./AboutComponent";
+import Contact from "./ContactComponent";
 import DishDetail from "./DishDetailComponent";
 
 const Drawer = createDrawerNavigator();
 const HomeNavigator = createStackNavigator();
 const MenuNavigator = createStackNavigator();
+const AboutNavigator = createStackNavigator();
+const ContactNavigator = createStackNavigator();
 
 const screenOptions = {
   headerStyle: { backgroundColor: "#512DA8" },
@@ -19,6 +23,27 @@ const screenOptions = {
   },
 };
 
+function ContactPage() {
+  return (
+    <ContactNavigator.Navigator
+      initialRouteName="Contact Us"
+      screenOptions={screenOptions}
+    >
+      <ContactNavigator.Screen name="Contact Us" component={Contact} />
+    </ContactNavigator.Navigator>
+  );
+}
+
+function AboutPage() {
+  return (
+    <AboutNavigator.Navigator
+      initialRouteName="About Us"
+      screenOptions={screenOptions}
+    >
+      <AboutNavigator.Screen name="About Us" component={About} />
+    </AboutNavigator.Navigator>
+  );
+}
 
 function HomePage() {
   return (
@@ -60,9 +85,11 @@ class Main extends React.Component {
             Platform.OS === "ios" ? 0 : Expo.Constants.statusBarHeight,
         }}
       >
-        <Drawer.Navigator screenOptions={{backgroundColor:'#000'}} drawerStyle={{backgroundColor:"#D1C4E9"}}>
+        <Drawer.Navigator drawerStyle={{backgroundColor:"#D1C4E9"}} drawerContentOptions={{labelStyle:{fontWeight:"bold"}}}>
           <Drawer.Screen name="Home" component={HomePage} options={{drawerLabel:"Home", title:"Home"}}/>
+          <Drawer.Screen name="About Us" component={AboutPage} options={{drawerLabel:"About Us", title:"About Us"}}/>
           <Drawer.Screen name="Menu" component={MenuPage} options={{drawerLabel:"Menu", title:"Menu"}}/>
+          <Drawer.Screen name="Contact Us" component={ContactPage} options={{drawerLabel:"Contact Us", title:"Contact Us"}}/>
         </Drawer.Navigator>
       </View>
     );
